@@ -1,0 +1,321 @@
+:root {
+  font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  font-weight: 400;
+
+  --color-bg: #121212;
+  --color-bg-soft: #1A1A1A;
+  --color-bg-card: rgba(37, 36, 34, 0.9);
+
+  --color-text-strong: #ffffff;
+  --color-text-normal: #e0e0e0;
+  --color-text-soft: #cccccc;
+
+  --color-title: #f7eac5;
+  --color-accent: #FFC300;
+  --color-accent-soft: #EBA82C;
+
+  --color-border-soft: #333;
+}
+
+/* Base */
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: radial-gradient(circle at top, var(--color-bg-soft) 30%, var(--color-bg) 60%);
+  color: var(--color-text-normal);
+}
+
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem;
+  text-align: center;
+  color: var(--color-title);
+  min-height: 100vh;
+}
+
+/* Container de la app */
+
+.App {
+  box-shadow: 0 0 50px #eba82c17;
+  border-radius: 16px;
+  padding: 50px;
+  background-color: var(--color-bg-soft);
+  color: var(--color-text-strong);
+  position: relative;
+
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='49' viewBox='0 0 28 49'%3E%3Cg fill-rule='evenodd'%3E%3Cg id='hexagons' fill='%23eba82c' fill-opacity='0.12'%3E%3Cpath d='M13.99 9.25l13 7.5v15l-13 7.5L1 31.75v-15l12.99-7.5zM3 17.9v12.7l10.99 6.34 11-6.35V17.9l-11-6.34L3 17.9zM0 15l12.98-7.5V0h-2v6.35L0 12.69v2.3zm0 18.5L12.98 41v8h-2v-6.85L0 35.81v-2.3zM15 0v7.5L27.99 15H28v-2.31h-.01L17 6.35V0h-2zm0 49v-8l12.99-7.5H28v2.31h-.01L17 42.15V49h-2z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  background-blend-mode: soft-light;
+}
+
+/* Titulos */
+
+h1 {
+  font-size: 3.8em;
+  margin-bottom: 2rem;
+  color: var(--color-title);
+  letter-spacing: 3px;
+  font-weight: 900;
+  text-shadow: 0 0 15px rgba(255, 195, 0, 0.7),
+               0 0 5px rgba(255, 195, 0, 0.4);
+}
+h4 {
+  font-size: 3.8em;
+  margin-bottom: 2rem;
+  color: var(--color-accent-soft);
+
+}
+ h3, h4, h5, h6 {
+  color: var(--color-text-strong);
+  margin: 0;
+}
+
+/* Botón e Input */
+
+input {
+  padding: 0.9em 1.4em;
+  border-radius: 50px;
+  border: 2px solid var(--color-border-soft);
+  background: #181818;
+  color: var(--color-text-strong);
+  outline: none;
+  font-size: 1.1em;
+  width: 280px;
+  transition: all 0.3s ease;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.4);
+}
+
+input:focus {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px rgba(255, 195, 0, 0.3),
+              inset 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+button {
+  background-color: var(--color-accent);
+  color: var(--color-bg);
+  border: none;
+  font-weight: 800;
+  padding: 0.9em 2em;
+  border-radius: 50px;
+  font-size: 1.1em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  letter-spacing: 0.5px;
+}
+
+button:hover {
+  box-shadow: 0 5px 15px rgba(255, 195, 0, 0.4);
+  background-color: #e8b000;
+}
+
+button:active {
+  transform: scale(0.97);
+}
+
+/* Card clima */
+
+.card-clima {
+  background: var(--color-bg-card);
+  padding: 2rem;
+  border-radius: 18px;
+  border: 1px solid var(--color-border-soft);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 2rem;
+  align-items: center;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.card-clima:hover {
+  transform: translateY(-5px);
+  border-color: var(--color-accent);
+}
+
+.card-clima h2 {
+  color: #FFC300 !important;
+}
+
+.clima-container {
+    background: var(--color-bg-card);
+  padding: 1.5rem;
+  border-radius: 14px;
+  border: 1px solid var(--color-border-soft);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.clima-container:hover {
+  transform: translateY(-5px);
+  border-color: var(--color-accent);
+}
+
+
+.clima-container h5 {
+  color: var(--color-text-soft);
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.clima-container h3 {
+  color: var(--color-accent);
+  font-size: 1.8rem;
+  font-weight: 800;
+}
+
+.clima-container p {
+  color: var(--color-text-normal);
+  font-size: 0.85rem;
+}
+
+/* Columna izq */
+
+.clima-icono {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-left: 30%;
+}
+
+.clima-icono h6 {
+  color: var(--color-text-soft);
+  font-size: 1rem;
+  letter-spacing: 1px;
+  text-transform: capitalize;
+  text-align: center;
+  
+}
+
+/* Columna der */
+
+.clima-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  text-align: center;      
+  align-items: center;    
+}
+
+.clima-info h2 {
+  color: var(--color-accent);
+  font-size: 1.6rem;
+}
+
+.clima-info h6 {
+  color: var(--color-text-soft);
+  font-size: 0.9rem;
+}
+
+.clima-info h3 {
+  color: var(--color-title);
+  font-size: 1.2rem;
+}
+
+.clima-info p {
+  color: var(--color-text-normal);
+  margin: 0.2rem 0;
+    text-align: center;
+
+}
+
+.clima-info img {
+  width: 40px;
+  margin: 0.3rem 0;
+}
+
+/* Loader */
+
+.loader-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.loader {
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+/* ERROR */
+
+.error-message {
+  background-color: #381a1a;
+  color: #ffd7d7;
+  padding: 1.2rem;
+  border-radius: 10px;
+  border: 1px solid #ff4444;
+  margin-top: 25px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  font-weight: 600;
+  box-shadow: 0 0 10px rgba(255, 68, 68, 0.3);
+}
+
+/* ANIMACIONES */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ====== SEPARADORES ====== */
+
+hr {
+  border: none;
+  height: 1px;
+  background: linear-gradient(to right,
+    #1a1a1a,
+    var(--color-accent-soft),
+    #1a1a1a
+  );
+  margin: 3rem 0;
+  width: 100%;
+}
+
+/* RADAR */
+
+.radar-box {
+  width: 250px;
+  height: 250px;
+  border: 1px solid rgba(255,255,255,0.3);
+  position: relative;
+  margin: auto;
+}
+
+.radar-circle {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 2px solid cyan;
+}
