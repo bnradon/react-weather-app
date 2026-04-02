@@ -112,7 +112,7 @@ button:hover {
 }
 
 button:active {
-  transform: scale(0.97);
+  transform: scale(0url(../../../z/z/src/index.css).97);
 }
 
 /* Card clima */
