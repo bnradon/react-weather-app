@@ -42,7 +42,8 @@ function App() {
   };
 
   useEffect(() => {
-    if (!weather) searchWeather("Pereira");
+    if (weather?.place?.name) setCity(weather.place.name);
+    else searchWeather("Pereira");
     // La carga inicial se realiza una sola vez.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -50,7 +51,7 @@ function App() {
   const current = weather?.current;
   const daily = weather?.daily;
   const hourly = weather?.hourly;
-  const currentHour = hourly?.time?.findIndex((time) => new Date(time) >= new Date()) ?? 0;
+  const currentHour = hourly?.time?.findIndex((time) => time >= (current?.time ?? "")) ?? 0;
   const nextHours = hourly && currentHour >= 0
     ? hourly.time.slice(currentHour, currentHour + 12).map((time, index) => ({
         time,
