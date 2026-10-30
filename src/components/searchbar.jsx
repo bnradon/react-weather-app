@@ -1,29 +1,21 @@
-import { useState } from 'react'
-import '../App.css'
-
-function SearchBar({ ciudad, setCiudad, onSearch }) {
-  
-
-
-  const buscar = () =>{
-    onSearch(ciudad)
-    
-  }
+function SearchBar({ city, setCity, onSearch }) {
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    onSearch(city);
+  };
 
   return (
-    <>
-      <div>
+    <form className="search-form" onSubmit={handleSubmit}>
       <input
-        type='text'
-        placeholder='Escribe una ciudad'
-        value={ciudad}
-        onChange={(e) => setCiudad(e.target.value)} 
+        type="search"
+        placeholder="Busca una ciudad..."
+        aria-label="Nombre de la ciudad"
+        value={city}
+        onChange={(event) => setCity(event.target.value)}
       />
-      </div>
-      <br/>
-      <button type='submit' onClick={buscar}>Buscar</button>
-    </>
-  )
+      <button type="submit">Buscar</button>
+    </form>
+  );
 }
 
-export default SearchBar
+export default SearchBar;
