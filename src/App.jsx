@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
 import SearchBar from "./components/searchbar.jsx";
+import LiquidEther from "./components/backgrounds/liquid/Liquid.jsx";
+import WeatherBg from "./components/backgrounds/weatherBg/weatherBg.jsx";
+
 import { getWeatherByCity, getWeatherIcon, getWeatherLabel } from "./services/weatherService.js";
 import "./App.css";
 
@@ -23,7 +26,7 @@ function App() {
 
   const searchWeather = async (searchCity) => {
     if (!searchCity.trim()) {
-      setError("Escribe el nombre de una ciudad para comenzar.");
+      setError("Sin ciudad, no hay busqueda ¬_¬");
       return;
     }
 
@@ -35,7 +38,7 @@ function App() {
       setCity(result.place.name);
       localStorage.setItem("climapp-weather", JSON.stringify(result));
     } catch (err) {
-      setError(err.message || "Ocurrió un error al consultar el clima.");
+      setError(err.message || "Ups! algo falló al hacer la consulta.");
     } finally {
       setLoading(false);
     }
@@ -62,32 +65,59 @@ function App() {
     : [];
 
   return (
+    <>
+     <div className="background-effect">
+           <LiquidEther
+    // colors={["#13203D","#3C78D8","#BFE7FF"]}
+    colors={["#2f1b40","#536db9","#6fbdc0"]}
+    mouseForce={3}
+    cursorSize={70}
+    persistence={0.82}
+    autoSpeed={0.45}
+    autoIntensity={1.8}
+    intensity={0.9}
+    viscosity={0.1}
+    resolution={0.5}
+    clickBurst
+    bounceEdges
+    intro
+    lightMode={false}
+/>
+         </div>
     <main className="app-shell">
       <header className="topbar">
         <a className="brand" href="/" aria-label="ClimApp inicio">
           <span className="brand-mark">☀</span>
           <span>clim<span>app</span></span>
         </a>
-        <span className="api-note"><span className="status-dot" /> Datos de Open-Meteo</span>
       </header>
 
       <section className="hero">
         <div className="hero-copy">
-          <p className="eyebrow">EL CLIMA, A TU MANERA</p>
-          <h1>Un día más <span>brillante.</span></h1>
-          <p className="hero-description">Consulta el tiempo ahora y descubre qué viene en las próximas horas.</p>
+          <h1>Buenos <span>Días </span> :)</h1>
+          <p className="hero-description">Hora local:</p>
         </div>
         <SearchBar city={city} setCity={setCity} onSearch={searchWeather} />
       </section>
 
       {error && <div className="error-message" role="alert">{error}</div>}
-      {loading && <div className="loading-state"><span className="loader-orbit" /> Consultando el clima...</div>}
+      {loading && <div className="loading-state"><span className="loader-orbit" /> Un momento</div>}
 
       {weather && current && daily && !loading && (
         <div className="weather-content">
+
+
           <section className="current-card">
+              
+ <div className="weather-bg-layer">
+    <WeatherBg
+      code={current.weather_code}
+      isDay={Boolean(current.is_day)}
+    />
+  </div>
+
             <div className="current-topline">
-              <div>
+              <div> 
                 <p className="eyebrow light">AHORA MISMO</p>
                 <h2>{weather.place.name}</h2>
                 <p className="location-subtitle">{[weather.place.admin1, weather.place.country].filter(Boolean).join(", ")}</p>
@@ -108,17 +138,21 @@ function App() {
               <span>💨 Viento <b>{Math.round(current.wind_speed_10m)} km/h</b></span>
               <span>☁️ Nubosidad <b>{current.cloud_cover}%</b></span>
             </div>
+
           </section>
+
+
+
 
           <section className="section-block">
             <div className="section-heading">
-              <div><p className="eyebrow">NO PIERDAS EL RITMO</p><h2>Próximas horas</h2></div>
-              <span className="section-hint">Pronóstico por hora</span>
+              <div><p className="eyebrow">¿Cómo estará luego?</p><h2>Próximas horas</h2></div>
+              <span className="section-hint">Prónostico</span>
             </div>
             <div className="hourly-list">
               {nextHours.map((hour, index) => (
                 <article className={index === 0 ? "hour-card active" : "hour-card"} key={hour.time}>
-                  <span className="hour-label">{index === 0 ? "Ahora" : formatHour(hour.time)}</span>
+                  <span className={index === 0 ? "hour-label active" : "hour-label"}>{index === 0 ? "Ahora" : formatHour(hour.time)}</span>
                   <span className="hour-icon">{getWeatherIcon(hour.code)}</span>
                   <strong>{Math.round(hour.temperature)}°</strong>
                   <span className="rain-chance">💧 {hour.rain ?? 0}%</span>
@@ -158,10 +192,11 @@ function App() {
       )}
 
       <footer className="footer">
-        <span>Hecho para mirar el cielo ☁️</span>
+        <span>Hecho por bnradon :)</span>
         <span>Pronóstico proporcionado por Open-Meteo</span>
       </footer>
     </main>
+    </>
   );
 }
 

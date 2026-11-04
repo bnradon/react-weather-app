@@ -49,6 +49,7 @@ export async function getWeatherByCity(city) {
   const weatherResponse = await fetch(`${FORECAST_URL}?${params}`);
   if (!weatherResponse.ok) throw new Error("No pudimos obtener el pronóstico del clima.");
   const weather = await weatherResponse.json();
+  console.log(weather)
 
   return {
     place: {
@@ -72,6 +73,7 @@ export function getWeatherLabel(code) {
   if ([71, 73, 75, 77, 85, 86].includes(code)) return "Nieve";
   if ([95, 96, 99].includes(code)) return "Tormenta";
   return "Condición variable";
+
 }
 
 export function getWeatherIcon(code, isDay = true) {
@@ -83,4 +85,7 @@ export function getWeatherIcon(code, isDay = true) {
   if ([71, 73, 75, 77, 85, 86].includes(code)) return "❄️";
   if ([95, 96, 99].includes(code)) return "⛈️";
   return "🌡️";
+
+  
 }
+
